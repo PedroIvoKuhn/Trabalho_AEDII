@@ -25,6 +25,7 @@ public class Vertice {
     }
 
     public void imprimirCaminhos() {
+        System.out.println("--==== Caminhos do vertice: " + this + " ====--");
         for (Aresta aresta : list) {
             System.out.println(aresta);
         }

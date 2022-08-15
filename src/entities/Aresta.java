@@ -36,7 +36,10 @@ public class Aresta {
 
     @Override
     public String toString() {
-        return "Destino: " + destino(A) + " Distancia: " + peso;
+        if(umaDirecao){
+           return "Destino: " + destino(A) + ", Distancia: " + peso + ", somente ida"; 
+        }
+        return "Destino: " + destino(A) + ", Distancia: " + peso;
     }
    
     

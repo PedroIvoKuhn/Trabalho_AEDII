@@ -3,66 +3,97 @@ import java.util.List;
 import java.util.Scanner;
 
 import entities.Aresta;
+import entities.EntitiesExeption;
 import entities.Vertice;
 
 public class App {
     private static Scanner sc = new Scanner(System.in);
     private static List<Vertice> listaVertice = new ArrayList<Vertice>();
 
-    public static void main(String[] args){
-
-        String numero;
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Entre com o " + (i+1) + " vertice:");
-            numero = sc.next();
-
-            Vertice vertice = new Vertice(numero);
-            listaVertice.add(vertice);
-        }
-
-        int x = 1, dire, peso;
-        String aux; 
-        boolean direcao;
-        do{
-            System.out.print("Entre com a origem: ");
-            numero = sc.next();
-            System.out.print("Destino: ");
-            aux = sc.next();
-            System.out.print("Peso: ");
-            
-            peso = sc.nextInt();
-            System.out.println("Uma Direção?(0/1) ");
-            dire = sc.nextInt();
-
-            if(dire == 1){
-                direcao = true;
-            }else{
-                direcao = false;
-            }
-
-            Vertice origem = busca(numero);
-            Vertice destino = busca(aux);
-
-            Aresta nova = new Aresta(peso, origem, destino, direcao);
-            origem.addAresta(nova);
-
-            System.out.println("Deseja continuar?(s=1, n=0)");
-            x = sc.nextInt();
-        }while(x != 0);
-        
-        for (Vertice vertice : listaVertice) {
-            vertice.imprimirCaminhos();
-        }
-
-
+    public App() {
     }
-
-    public static Vertice busca(String nome) {
+    
+    private Vertice busca(String nome) {
         for (Vertice vertice : listaVertice) {
             if(nome.equals(vertice.getNome())){
                 return vertice;
             }
         }
-        return null;
+        throw new EntitiesExeption("Vértice não encontrado!");   
     }
+
+    private int lerPeso() {
+        int x;
+        x = sc.nextInt();
+
+        if(x >= 0){
+            return x;
+        }
+        throw new EntitiesExeption("Valor inserido inválido!");
+    }
+
+    private boolean lerDirecao() {
+        String aux;
+        aux = sc.next();
+
+        if(aux.charAt(0) == 's'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+// =======================================================================
+    public static void main(String[] args){
+
+        App app = new App();
+        Vertice origem, destino;
+        String nome, aux, sair; 
+        int peso;
+        boolean direcao;
+
+// Leitura dos Vértices
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Entre com o " + (i+1) + " vertice: ");
+            nome = sc.next();
+
+            Vertice vertice = new Vertice(nome);
+            listaVertice.add(vertice);
+        }
+        
+// Leitura das arestas
+        do{
+            try{
+                System.out.print("\nEntre com a origem: ");
+                nome = sc.next();
+                origem = app.busca(nome);
+                System.out.print("Destino: ");
+                aux = sc.next();
+                destino = app.busca(aux);
+                System.out.print("Peso: ");
+                peso = app.lerPeso();
+                System.out.println("Uma Direção?(s/n) ");
+                direcao = app.lerDirecao();
+
+                Aresta nova = new Aresta(peso, origem, destino, direcao);
+                origem.addAresta(nova);
+
+            }
+            catch(EntitiesExeption e){
+                System.out.println(e.getMessage() + "\n\n");
+                sc.nextLine();
+            }
+
+            System.out.println("Deseja continuar?(s/n)");
+            sair = sc.next();
+        }while(sair.charAt(0) != 'n');
+        
+
+//  Impressão dos pontos e caminhos
+        for (Vertice vertice : listaVertice) {
+            vertice.imprimirCaminhos();
+        }
+    }
+
+    
 }
