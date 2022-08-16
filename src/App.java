@@ -6,6 +6,8 @@ import entities.Aresta;
 import entities.EntitiesExeption;
 import entities.Vertice;
 
+// Trabalho realizado por Gabriel Muller Fischer e Pedro Ivo Kuhn
+
 public class App {
     private static Scanner sc = new Scanner(System.in);
     private static List<Vertice> listaVertice = new ArrayList<Vertice>();
@@ -74,9 +76,16 @@ public class App {
                 peso = app.lerPeso();
                 System.out.println("Uma Direção?(s/n) ");
                 direcao = app.lerDirecao();
-
+                
                 Aresta nova = new Aresta(peso, origem, destino, direcao);
-                origem.addAresta(nova);
+
+                if(direcao){
+                    origem.addAresta(nova);
+                }else{
+                    Aresta novaVoltando = new Aresta(peso, destino, origem, direcao);
+                    origem.addAresta(nova);
+                    destino.addAresta(novaVoltando);
+                }
 
             }
             catch(EntitiesExeption e){
