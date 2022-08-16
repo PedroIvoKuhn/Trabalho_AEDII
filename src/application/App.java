@@ -1,5 +1,6 @@
 package application;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,16 +22,17 @@ public class App {
         boolean direcao;
 
 // Leitura dos Vértices
+        UI.limparTela();    
         for (int i = 0; i < 3; i++) {
             System.out.print("Entre com o " + (i+1) + " vertice: ");
-
-            Vertice vertice = new Vertice(sc.next());
-            listaVertice.add(vertice);
+            listaVertice.add(new Vertice(sc.next()));
         }
         
 // Leitura das arestas
         do{
             try{
+                UI.limparTela();
+                UI.imprimirVertices(listaVertice);
                 System.out.print("\nEntre com a origem: ");
                 origem = UI.busca(sc.next(), listaVertice);
                 System.out.print("Destino: ");
@@ -45,14 +47,17 @@ public class App {
                 if(direcao){
                     origem.addAresta(nova);
                 }else{
-                    Aresta novaVoltando = new Aresta(peso, destino, origem, direcao);
                     origem.addAresta(nova);
-                    destino.addAresta(novaVoltando);
+                    destino.addAresta(new Aresta(peso, destino, origem, direcao));
                 }
 
             }
             catch(EntitiesExeption e){
-                System.out.println(e.getMessage() + "\n\n");
+                System.out.println("\n" + e.getMessage() + "\n");
+                sc.nextLine();
+            }
+            catch(InputMismatchException e){
+                System.out.println("\nErro de digitação\n");
                 sc.nextLine();
             }
 
@@ -60,11 +65,8 @@ public class App {
             sair = sc.next();
         }while(sair.charAt(0) != 'n');
         
+        UI.imprimirCaminhos(listaVertice);
 
-//  Impressão dos pontos e caminhos
-        for (Vertice vertice : listaVertice) {
-            vertice.imprimirCaminhos();
-        }
     }
 
     
