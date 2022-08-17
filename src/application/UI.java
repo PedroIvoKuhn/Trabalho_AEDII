@@ -56,4 +56,35 @@ public class UI {
             vertice.imprimirCaminhos();
         }
     }
+
+    public static void imprimirMatriz(List<Vertice> listaVertice) {
+        int tamanho = listaVertice.size();
+        int matriz[][] = new int[tamanho][tamanho];
+
+        Vertice vetor[] = new Vertice[tamanho];
+
+        for (int i = 0; i < vetor.length; i++) {
+            vetor[i] = listaVertice.get(i);
+        }
+
+        for (int i = 0; i < vetor.length; i++) {
+            for (int j = 0; j < vetor.length; j++) {
+                matriz[i][j] = vetor[i].pegarPeso(vetor[j]);
+            }
+        }
+        System.out.println("\n--==== TABELA ====--");
+        System.out.print("\t");
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.print(vetor[i] + "\t");
+        }
+        System.out.println();
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.print(vetor[i] + "\t");
+            for (int j = 0; j < vetor.length; j++) {
+                System.out.print(matriz[i][j] + "\t");
+            }
+            System.out.println();
+        }
+               
+    }
 }

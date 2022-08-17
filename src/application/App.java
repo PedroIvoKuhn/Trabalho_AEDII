@@ -17,16 +17,20 @@ public class App {
     public static void main(String[] args){
 
         Vertice origem, destino;
-        String sair; 
-        int peso;
+        String aux; 
+        int peso, contador = 0;
         boolean direcao;
 
 // Leitura dos Vértices
         UI.limparTela();    
-        for (int i = 0; i < 3; i++) {
-            System.out.print("Entre com o " + (i+1) + " vertice: ");
-            listaVertice.add(new Vertice(sc.next()));
-        }
+        do{
+            System.out.print("Entre com o " + (contador+1) + " vertice (0 para sair): ");
+            aux = sc.next();
+            if(aux.charAt(0) != '0'){
+               listaVertice.add(new Vertice(aux)); 
+            }
+            contador++;
+        }while(aux.charAt(0) != '0' && contador != 20);
         
 // Leitura das arestas
         do{
@@ -44,7 +48,7 @@ public class App {
                 
                 Aresta nova = new Aresta(peso, origem, destino, direcao);
 
-                if(direcao){
+                if(direcao || origem == destino){
                     origem.addAresta(nova);
                 }else{
                     origem.addAresta(nova);
@@ -62,11 +66,11 @@ public class App {
             }
 
             System.out.println("Deseja continuar?(s/n)");
-            sair = sc.next();
-        }while(sair.charAt(0) != 'n');
-        
+            aux = sc.next();
+        }while(aux.charAt(0) != 'n');
+        UI.limparTela();
         UI.imprimirCaminhos(listaVertice);
-
+        UI.imprimirMatriz(listaVertice);
     }
 
     

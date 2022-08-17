@@ -20,6 +20,10 @@ public class Aresta {
         return A;
     }
 
+    public Vertice getB() {
+        return B;
+    }
+
     public Vertice destino(Vertice inicio) {
         if(umaDirecao || inicio.equals(A)){
             return B;
@@ -40,6 +44,28 @@ public class Aresta {
            return "Destino: " + destino(A) + ", Distancia: " + peso + ", somente ida"; 
         }
         return "Destino: " + destino(A) + ", Distancia: " + peso;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Aresta other = (Aresta) obj;
+        if (A == null) {
+            if (other.A != null)
+                return false;
+        } else if (!A.equals(other.A))
+            return false;
+        if (B == null) {
+            if (other.B != null)
+                return false;
+        } else if (!B.equals(other.B))
+            return false;
+        return true;
     }
    
     
