@@ -3,7 +3,6 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Stack;
 
 import entities.EntitiesExeption;
 import entities.Vertice;
@@ -91,15 +90,11 @@ public class UI {
     }
 
     public static void imprimirMenorCaminho(Vertice origem, Vertice destino) {
-        List<Vertice> pilha = new ArrayList<Vertice>();
         System.out.println("\n--==== Menor Caminho ====--");
         do{
-            pilha.add(destino);
+            System.out.print(destino + " <- ");
             destino = destino.getVerticeAnterior();
         }while(destino != null);
 
-        for (Vertice vertice : pilha) {
-            System.out.print(vertice + " <- ");
-        }
     }
 }

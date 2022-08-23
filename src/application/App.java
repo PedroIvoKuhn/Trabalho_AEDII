@@ -95,9 +95,5 @@ public class App {
                     aux = sc.next();
                 }
             }while(aux.charAt(0) != 'n');
-
-        
-            
-        
     }
 }
