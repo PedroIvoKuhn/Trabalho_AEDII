@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -88,12 +90,18 @@ public class UI {
                
     }
 
-    public static void imprimirMenorCaminho(Vertice origem, Vertice destino) {
+    public static void imprimirMenorCaminho(int tamanho, Vertice destino) {
+        List<Vertice> lista = new ArrayList<>();
         System.out.println("\n--==== Menor Caminho ====--");
+        System.out.println("Distancia percorrida: " + destino.getDistanciaPercorrida());
         do{
-            System.out.print(destino + " <- ");
+            lista.add(destino);
             destino = destino.getVerticeAnterior();
         }while(destino != null);
+        Collections.reverse(lista);
+        for (Vertice vertice : lista) {
+            System.out.print(" -> " + vertice);
+        }
 
     }
 }

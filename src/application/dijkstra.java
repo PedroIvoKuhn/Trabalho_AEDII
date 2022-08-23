@@ -10,14 +10,19 @@ public class dijkstra {
         Vertice aux;
         origem.setVerticeAnterior(null);
         origem.setDistanciaPercorrida(0);
+        int distancia;
         
         do{
             for (Aresta aresta : origem.getList()) {
                 if (!origem.getList().isEmpty()){
-                aux = aresta.getB();
+                    aux = aresta.getB();
                     if(!aux.getPercorrido()){
-                        aux.setVerticeAnterior(aresta.getA());
-                        aux.setDistanciaPercorrida(aresta.getPeso() + origem.getDistanciaPercorrida());
+                        distancia = aresta.getPeso() + origem.getDistanciaPercorrida();
+                        if (distancia < aux.getDistanciaPercorrida()){
+                            aux.setVerticeAnterior(aresta.getA());
+                            aux.setDistanciaPercorrida(distancia); 
+                        }
+                        
                     }
                 
                 }

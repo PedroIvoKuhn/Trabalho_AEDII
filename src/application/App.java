@@ -85,7 +85,7 @@ public class App {
                     destino = UI.busca(sc.next(), listaVertice);
 
                     dijkstra.busca(listaVertice, origem, destino);
-                    UI.imprimirMenorCaminho(origem, destino);
+                    UI.imprimirMenorCaminho(listaVertice.size(), destino);
 
                 }
                 catch(EntitiesExeption e){
