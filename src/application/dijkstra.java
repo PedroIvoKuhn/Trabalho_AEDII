@@ -12,7 +12,6 @@ public class dijkstra {
         origem.setDistanciaPercorrida(0);
         
         do{
-
             for (Aresta aresta : origem.getList()) {
                 if (!origem.getList().isEmpty()){
                 aux = aresta.getB();
@@ -25,7 +24,6 @@ public class dijkstra {
             }
             origem.setPercorrido(true);
             origem = menorCaminho(listaVertice);
-            System.out.println("banana");
 
         }while(verificaPercorridos(listaVertice));
         
@@ -43,16 +41,12 @@ public class dijkstra {
     private static Vertice menorCaminho(List<Vertice> listaVertice) {
         Vertice aux = new Vertice();
         for (Vertice vertice : listaVertice) {
-            System.out.println("batata");
             if (vertice.getPercorrido() != true){
-                System.out.println("alface");
                 if(aux.getDistanciaPercorrida() > vertice.getDistanciaPercorrida()){
-                    System.out.println("== morango ==");
                     aux = vertice;
                 }
             }
         }
         return aux;
     }
-
 }
