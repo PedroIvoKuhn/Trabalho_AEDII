@@ -23,7 +23,7 @@ public class Aresta {
     public Vertice getB() {
         return B;
     }
-
+/*
     public Vertice destino(Vertice inicio) {
         if(umaDirecao || inicio.equals(A)){
             return B;
@@ -33,7 +33,7 @@ public class Aresta {
         }
         return null;   
     }
-
+*/
     public boolean isUmaDirecao() {
         return umaDirecao;
     }
@@ -41,9 +41,9 @@ public class Aresta {
     @Override
     public String toString() {
         if(umaDirecao){
-           return "Destino: " + destino(A) + ", Distancia: " + peso + ", somente ida"; 
+           return "Destino: " + getB() + ", Distancia: " + peso + ", somente ida"; 
         }
-        return "Destino: " + destino(A) + ", Distancia: " + peso;
+        return "Destino: " + getB() + ", Distancia: " + peso;
     }
 
     @Override

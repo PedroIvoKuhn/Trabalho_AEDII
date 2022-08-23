@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Vertice {
     private String nome;
+    private Vertice verticeAnterior = null;
+    private int distanciaPercorrida = 2147483647;
+    private boolean percorrido = false;
 
     private List<Aresta> list = new ArrayList<Aresta>();
 
@@ -12,8 +15,39 @@ public class Vertice {
         this.nome = nome;
     }
 
+    public Vertice() {
+    }
+
     public String getNome() {
         return nome;
+    }
+
+    public List<Aresta> getList() {
+        return list;
+    }
+
+    public Vertice getVerticeAnterior() {
+        return verticeAnterior;
+    }
+
+    public void setVerticeAnterior(Vertice verticeAnterior) {
+        this.verticeAnterior = verticeAnterior;
+    }
+
+    public int getDistanciaPercorrida() {
+        return distanciaPercorrida;
+    }
+
+    public void setDistanciaPercorrida(int distanciaPercorrida) {
+        this.distanciaPercorrida = distanciaPercorrida;
+    }
+
+    public boolean getPercorrido() {
+        return percorrido;
+    }
+
+    public void setPercorrido(boolean percorrido) {
+        this.percorrido = percorrido;
     }
 
     public void addAresta(Aresta nova) {
