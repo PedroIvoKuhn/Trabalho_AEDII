@@ -40,11 +40,16 @@ public class App {
                 origem = UI.busca(sc.next(), listaVertice);
                 System.out.print("Destino: ");
                 destino = UI.busca(sc.next(), listaVertice);
-                System.out.print("Peso: ");
-                peso = UI.lerPeso(sc);
-                System.out.println("Uma Direção?(s/n) ");
-                direcao = UI.lerDirecao(sc);
-                
+                if(!(origem == destino)){
+                    System.out.print("Peso: ");
+                    peso = UI.lerPeso(sc);
+                    System.out.println("Uma Direção?(s/n) ");
+                    direcao = UI.lerDirecao(sc);
+                }else{
+                    peso =0;
+                    direcao = false;
+                }
+                 
                 Aresta nova = new Aresta(peso, origem, destino, direcao);
 
                 if(direcao || origem == destino){
@@ -66,7 +71,7 @@ public class App {
             System.out.println("Deseja continuar?(s/n)");
             aux = sc.next();
 
-            }while(aux.charAt(0) != 'n');
+        }while(aux.charAt(0) != 'n');
             UI.limparTela();
             UI.imprimirCaminhos(listaVertice);
             UI.imprimirMatriz(listaVertice);
@@ -75,25 +80,25 @@ public class App {
             UI.limparTela();
 
 // DIJKSTRA
-            do{
-                aux = "n";
-                try{
-                    UI.imprimirVertices(listaVertice);
-                    System.out.print("\nDigite o ponto de partida: ");
-                    origem = UI.busca(sc.next(), listaVertice);
-                    System.out.print("Digite o ponto de chegada: ");
-                    destino = UI.busca(sc.next(), listaVertice);
+        do{
+            aux = "n";
+            try{
+                UI.imprimirVertices(listaVertice);
+                System.out.print("\nDigite o ponto de partida: ");
+                origem = UI.busca(sc.next(), listaVertice);
+                System.out.print("Digite o ponto de chegada: ");
+                destino = UI.busca(sc.next(), listaVertice);
 
-                    dijkstra.busca(listaVertice, origem, destino);
-                    UI.imprimirMenorCaminho(listaVertice.size(), destino);
+                dijkstra.busca(listaVertice, origem, destino);
+                UI.imprimirMenorCaminho(listaVertice.size(), destino);
 
-                }
-                catch(EntitiesExeption e){
-                    System.out.println("\n" + e.getMessage() + "\n");
-                    sc.nextLine();
-                    System.out.println("Deseja continuar?(s/n)");
-                    aux = sc.next();
-                }
-            }while(aux.charAt(0) != 'n');
+            }
+            catch(EntitiesExeption e){
+                System.out.println("\n" + e.getMessage() + "\n");
+                sc.nextLine();
+                System.out.println("Deseja continuar?(s/n)");
+                aux = sc.next();
+            }
+        }while(aux.charAt(0) != 'n');
     }
 }
