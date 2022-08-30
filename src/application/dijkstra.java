@@ -13,18 +13,16 @@ public class dijkstra {
         int distancia;
         
         do{
-            for (Aresta aresta : origem.getList()) {
-                if (!origem.getList().isEmpty()){
+            if (!origem.getList().isEmpty()){
+                for (Aresta aresta : origem.getList()) {
                     aux = aresta.getB();
                     if(!aux.getPercorrido()){
                         distancia = aresta.getPeso() + origem.getDistanciaPercorrida();
                         if (distancia < aux.getDistanciaPercorrida()){
                             aux.setVerticeAnterior(aresta.getA());
                             aux.setDistanciaPercorrida(distancia); 
-                        }
-                        
+                        } 
                     }
-                
                 }
             }
             origem.setPercorrido(true);
